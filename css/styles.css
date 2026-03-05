@@ -1300,7 +1300,7 @@ button:focus:not(:focus-visible) {
   }
 
   .resource-card__thumb {
-    width: 48px;
+    width: 45px;
     aspect-ratio: 1;
     flex-shrink: 0;
   }
