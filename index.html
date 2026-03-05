@@ -1,0 +1,616 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VideoForge — Editor de video profesional. Mockup HTML/CSS.">
+  <title>VideoForge — Editor de Video</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== SVG Icon Sprite ========== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="icon-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+    <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></symbol>
+    <symbol id="icon-skip-back" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></symbol>
+    <symbol id="icon-skip-forward" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></symbol>
+    <symbol id="icon-undo" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></symbol>
+    <symbol id="icon-redo" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></symbol>
+    <symbol id="icon-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
+    <symbol id="icon-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></symbol>
+    <symbol id="icon-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="icon-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+    <symbol id="icon-film" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></symbol>
+    <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+    <symbol id="icon-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="icon-type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+    <symbol id="icon-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+    <symbol id="icon-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="icon-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></symbol>
+    <symbol id="icon-maximize" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="icon-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  </svg>
+
+  <!-- ========== Main Toolbar ========== -->
+  <header class="toolbar" role="banner">
+    <div class="toolbar__section toolbar__section--left">
+      <a href="#" class="toolbar__logo" aria-label="VideoForge">
+        <svg class="icon icon--logo"><use href="#icon-film"/></svg>
+        <span>VideoForge</span>
+      </a>
+      <nav class="toolbar__nav" aria-label="Menú principal">
+        <button class="toolbar__menu-item">Archivo</button>
+        <button class="toolbar__menu-item">Editar</button>
+        <button class="toolbar__menu-item">Ver</button>
+        <button class="toolbar__menu-item">Efectos</button>
+      </nav>
+    </div>
+
+    <div class="toolbar__section toolbar__section--center">
+      <div class="toolbar__actions" role="group" aria-label="Acciones de edición">
+        <button class="toolbar__btn" title="Deshacer" aria-label="Deshacer">
+          <svg class="icon"><use href="#icon-undo"/></svg>
+        </button>
+        <button class="toolbar__btn" title="Rehacer" aria-label="Rehacer">
+          <svg class="icon"><use href="#icon-redo"/></svg>
+        </button>
+        <span class="toolbar__divider" aria-hidden="true"></span>
+        <button class="toolbar__btn" title="Cortar" aria-label="Cortar">
+          <svg class="icon"><use href="#icon-scissors"/></svg>
+        </button>
+        <button class="toolbar__btn" title="Copiar" aria-label="Copiar">
+          <svg class="icon"><use href="#icon-copy"/></svg>
+        </button>
+        <button class="toolbar__btn" title="Eliminar" aria-label="Eliminar">
+          <svg class="icon"><use href="#icon-trash"/></svg>
+        </button>
+        <span class="toolbar__divider" aria-hidden="true"></span>
+        <button class="toolbar__btn" title="Acercar" aria-label="Acercar">
+          <svg class="icon"><use href="#icon-zoom-in"/></svg>
+        </button>
+        <button class="toolbar__btn" title="Alejar" aria-label="Alejar">
+          <svg class="icon"><use href="#icon-zoom-out"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="toolbar__section toolbar__section--right">
+      <span class="toolbar__project-name">Proyecto Demo</span>
+      <button class="toolbar__btn" title="Configuración" aria-label="Configuración">
+        <svg class="icon"><use href="#icon-settings"/></svg>
+      </button>
+      <button class="btn btn--primary">
+        <svg class="icon"><use href="#icon-upload"/></svg>
+        Exportar
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== Editor Workspace ========== -->
+  <main class="editor">
+
+    <!-- ===== Panel de Recursos (izquierda) ===== -->
+    <aside class="panel panel--resources" aria-label="Panel de recursos gráficos">
+      <nav class="panel__tabs" role="tablist" aria-label="Categorías de recursos">
+        <button class="panel__tab panel__tab--active" role="tab" aria-selected="true" aria-controls="tab-media">
+          <svg class="icon icon--sm"><use href="#icon-film"/></svg>
+          <span>Media</span>
+        </button>
+        <button class="panel__tab" role="tab" aria-selected="false" aria-controls="tab-text">
+          <svg class="icon icon--sm"><use href="#icon-type"/></svg>
+          <span>Texto</span>
+        </button>
+        <button class="panel__tab" role="tab" aria-selected="false" aria-controls="tab-elements">
+          <svg class="icon icon--sm"><use href="#icon-layers"/></svg>
+          <span>Elementos</span>
+        </button>
+        <button class="panel__tab" role="tab" aria-selected="false" aria-controls="tab-transitions">
+          <svg class="icon icon--sm"><use href="#icon-zap"/></svg>
+          <span>Transiciones</span>
+        </button>
+      </nav>
+
+      <div class="panel__search">
+        <svg class="icon icon--sm"><use href="#icon-search"/></svg>
+        <input type="search" class="panel__search-input" placeholder="Buscar recursos..." aria-label="Buscar recursos">
+      </div>
+
+      <div class="panel__body" id="tab-media" role="tabpanel">
+        <div class="resource-grid">
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--video">
+              <svg class="icon"><use href="#icon-film"/></svg>
+              <span class="resource-card__badge">00:45</span>
+            </div>
+            <span class="resource-card__name">intro_final.mp4</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--video">
+              <svg class="icon"><use href="#icon-film"/></svg>
+              <span class="resource-card__badge">01:22</span>
+            </div>
+            <span class="resource-card__name">escena_01.mp4</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--video">
+              <svg class="icon"><use href="#icon-film"/></svg>
+              <span class="resource-card__badge">00:38</span>
+            </div>
+            <span class="resource-card__name">escena_02.mp4</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--image">
+              <svg class="icon"><use href="#icon-image"/></svg>
+            </div>
+            <span class="resource-card__name">overlay.png</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--image">
+              <svg class="icon"><use href="#icon-image"/></svg>
+            </div>
+            <span class="resource-card__name">logo_marca.svg</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--audio">
+              <svg class="icon"><use href="#icon-music"/></svg>
+            </div>
+            <span class="resource-card__name">musica_fondo.mp3</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--audio">
+              <svg class="icon"><use href="#icon-music"/></svg>
+            </div>
+            <span class="resource-card__name">sfx_transicion.wav</span>
+          </article>
+          <article class="resource-card" draggable="true">
+            <div class="resource-card__thumb resource-card__thumb--video">
+              <svg class="icon"><use href="#icon-film"/></svg>
+              <span class="resource-card__badge">02:10</span>
+            </div>
+            <span class="resource-card__name">cierre.mp4</span>
+          </article>
+        </div>
+      </div>
+
+      <button class="panel__upload-btn">
+        <svg class="icon icon--sm"><use href="#icon-upload"/></svg>
+        Subir archivos
+      </button>
+    </aside>
+
+    <!-- ===== Área de Preview del Video ===== -->
+    <section class="preview" aria-label="Vista previa del video">
+      <figure class="preview__canvas">
+        <div class="preview__viewport">
+          <div class="preview__placeholder">
+            <svg class="icon icon--xl"><use href="#icon-play"/></svg>
+            <p>Vista previa del video</p>
+          </div>
+        </div>
+      </figure>
+
+      <div class="preview__controls">
+        <div class="preview__transport" role="group" aria-label="Controles de reproducción">
+          <button class="preview__btn" title="Retroceder" aria-label="Retroceder">
+            <svg class="icon icon--sm"><use href="#icon-skip-back"/></svg>
+          </button>
+          <button class="preview__btn preview__btn--play" title="Reproducir" aria-label="Reproducir">
+            <svg class="icon"><use href="#icon-play"/></svg>
+          </button>
+          <button class="preview__btn" title="Avanzar" aria-label="Avanzar">
+            <svg class="icon icon--sm"><use href="#icon-skip-forward"/></svg>
+          </button>
+        </div>
+
+        <div class="preview__timecode" aria-label="Código de tiempo">
+          <span class="preview__time preview__time--current">00:00:15:04</span>
+          <span class="preview__time-sep">/</span>
+          <span class="preview__time preview__time--total">00:02:30:00</span>
+        </div>
+
+        <div class="preview__extras">
+          <button class="preview__btn" title="Volumen" aria-label="Volumen">
+            <svg class="icon icon--sm"><use href="#icon-volume"/></svg>
+          </button>
+          <div class="preview__volume-bar" role="slider" aria-label="Nivel de volumen" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            <div class="preview__volume-fill" style="width: 75%;"></div>
+          </div>
+          <button class="preview__btn" title="Pantalla completa" aria-label="Pantalla completa">
+            <svg class="icon icon--sm"><use href="#icon-maximize"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Panel de Propiedades (derecha) ===== -->
+    <aside class="panel panel--properties" aria-label="Panel de propiedades">
+      <header class="panel__header">
+        <h2 class="panel__title">
+          <svg class="icon icon--sm"><use href="#icon-sliders"/></svg>
+          Propiedades
+        </h2>
+        <span class="panel__subtitle">Clip: intro_final.mp4</span>
+      </header>
+
+      <div class="panel__body panel__body--scroll">
+        <!-- Sección: Transformar -->
+        <section class="prop-section">
+          <button class="prop-section__header" aria-expanded="true">
+            <svg class="icon icon--sm"><use href="#icon-maximize"/></svg>
+            <span>Transformar</span>
+            <svg class="icon icon--sm prop-section__chevron"><use href="#icon-chevron-down"/></svg>
+          </button>
+          <div class="prop-section__body">
+            <div class="prop-row">
+              <label class="prop-row__label">Posición X</label>
+              <div class="prop-row__control">
+                <input type="number" class="input input--num" value="960">
+                <span class="prop-row__unit">px</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Posición Y</label>
+              <div class="prop-row__control">
+                <input type="number" class="input input--num" value="540">
+                <span class="prop-row__unit">px</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Escala</label>
+              <div class="prop-row__control prop-row__control--wide">
+                <input type="range" class="range" min="0" max="200" value="100">
+                <span class="prop-row__value">100%</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Rotación</label>
+              <div class="prop-row__control">
+                <input type="number" class="input input--num" value="0">
+                <span class="prop-row__unit">°</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Opacidad</label>
+              <div class="prop-row__control prop-row__control--wide">
+                <input type="range" class="range" min="0" max="100" value="100">
+                <span class="prop-row__value">100%</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección: Apariencia -->
+        <section class="prop-section">
+          <button class="prop-section__header" aria-expanded="true">
+            <svg class="icon icon--sm"><use href="#icon-eye"/></svg>
+            <span>Apariencia</span>
+            <svg class="icon icon--sm prop-section__chevron"><use href="#icon-chevron-down"/></svg>
+          </button>
+          <div class="prop-section__body">
+            <div class="prop-row">
+              <label class="prop-row__label">Fondo</label>
+              <div class="prop-row__control">
+                <span class="color-swatch" style="background:#1a1a2e;"></span>
+                <input type="text" class="input input--num" value="#1A1A2E">
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Borde</label>
+              <div class="prop-row__control">
+                <input type="number" class="input input--num" value="0">
+                <span class="prop-row__unit">px</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Radio</label>
+              <div class="prop-row__control">
+                <input type="number" class="input input--num" value="0">
+                <span class="prop-row__unit">px</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Sombra</label>
+              <div class="prop-row__control">
+                <select class="input input--select">
+                  <option>Ninguna</option>
+                  <option>Suave</option>
+                  <option>Media</option>
+                  <option>Fuerte</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección: Efectos -->
+        <section class="prop-section">
+          <button class="prop-section__header" aria-expanded="true">
+            <svg class="icon icon--sm"><use href="#icon-zap"/></svg>
+            <span>Efectos</span>
+            <svg class="icon icon--sm prop-section__chevron"><use href="#icon-chevron-down"/></svg>
+          </button>
+          <div class="prop-section__body">
+            <div class="prop-row">
+              <label class="prop-row__label">Desenfoque</label>
+              <div class="prop-row__control prop-row__control--wide">
+                <input type="range" class="range" min="0" max="20" value="0">
+                <span class="prop-row__value">0</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Brillo</label>
+              <div class="prop-row__control prop-row__control--wide">
+                <input type="range" class="range" min="-100" max="100" value="0">
+                <span class="prop-row__value">0</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Contraste</label>
+              <div class="prop-row__control prop-row__control--wide">
+                <input type="range" class="range" min="-100" max="100" value="0">
+                <span class="prop-row__value">0</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Saturación</label>
+              <div class="prop-row__control prop-row__control--wide">
+                <input type="range" class="range" min="-100" max="100" value="0">
+                <span class="prop-row__value">0</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección: Texto -->
+        <section class="prop-section">
+          <button class="prop-section__header" aria-expanded="true">
+            <svg class="icon icon--sm"><use href="#icon-type"/></svg>
+            <span>Texto</span>
+            <svg class="icon icon--sm prop-section__chevron"><use href="#icon-chevron-down"/></svg>
+          </button>
+          <div class="prop-section__body">
+            <div class="prop-row">
+              <label class="prop-row__label">Fuente</label>
+              <div class="prop-row__control">
+                <select class="input input--select">
+                  <option>Inter</option>
+                  <option>Roboto</option>
+                  <option>Montserrat</option>
+                  <option>Open Sans</option>
+                  <option>Poppins</option>
+                </select>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Tamaño</label>
+              <div class="prop-row__control">
+                <input type="number" class="input input--num" value="48">
+                <span class="prop-row__unit">px</span>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Color</label>
+              <div class="prop-row__control">
+                <span class="color-swatch" style="background:#ffffff;"></span>
+                <input type="text" class="input input--num" value="#FFFFFF">
+              </div>
+            </div>
+            <div class="prop-row">
+              <label class="prop-row__label">Peso</label>
+              <div class="prop-row__control">
+                <select class="input input--select">
+                  <option>Light (300)</option>
+                  <option>Regular (400)</option>
+                  <option selected>Medium (500)</option>
+                  <option>Semi Bold (600)</option>
+                  <option>Bold (700)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- ===== Timeline de Edición ===== -->
+    <section class="timeline" aria-label="Línea de tiempo de edición">
+      <header class="timeline__header">
+        <div class="timeline__tools" role="group" aria-label="Herramientas de línea de tiempo">
+          <button class="timeline__tool-btn" title="Agregar pista" aria-label="Agregar pista">
+            <svg class="icon icon--sm"><use href="#icon-plus"/></svg>
+          </button>
+          <button class="timeline__tool-btn" title="Cortar en playhead" aria-label="Cortar en playhead">
+            <svg class="icon icon--sm"><use href="#icon-scissors"/></svg>
+          </button>
+          <button class="timeline__tool-btn" title="Eliminar selección" aria-label="Eliminar selección">
+            <svg class="icon icon--sm"><use href="#icon-trash"/></svg>
+          </button>
+          <span class="toolbar__divider" aria-hidden="true"></span>
+          <button class="timeline__tool-btn" title="Bloquear todo" aria-label="Bloquear todo">
+            <svg class="icon icon--sm"><use href="#icon-lock"/></svg>
+          </button>
+        </div>
+        <div class="timeline__zoom" role="group" aria-label="Zoom de línea de tiempo">
+          <button class="timeline__tool-btn" title="Alejar" aria-label="Alejar timeline">
+            <svg class="icon icon--sm"><use href="#icon-zoom-out"/></svg>
+          </button>
+          <div class="timeline__zoom-bar">
+            <div class="timeline__zoom-fill" style="width: 50%;"></div>
+          </div>
+          <button class="timeline__tool-btn" title="Acercar" aria-label="Acercar timeline">
+            <svg class="icon icon--sm"><use href="#icon-zoom-in"/></svg>
+          </button>
+          <span class="timeline__zoom-label">100%</span>
+        </div>
+      </header>
+
+      <div class="timeline__body">
+        <!-- Track Headers (sidebar izquierdo) -->
+        <div class="timeline__sidebar">
+          <div class="track-header">
+            <span class="track-header__badge track-header__badge--video">V1</span>
+            <span class="track-header__name">Video 1</span>
+            <div class="track-header__controls">
+              <button class="track-header__btn" title="Visibilidad" aria-label="Toggle visibilidad Video 1">
+                <svg class="icon icon--xs"><use href="#icon-eye"/></svg>
+              </button>
+              <button class="track-header__btn" title="Bloquear" aria-label="Toggle bloqueo Video 1">
+                <svg class="icon icon--xs"><use href="#icon-lock"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="track-header">
+            <span class="track-header__badge track-header__badge--video">V2</span>
+            <span class="track-header__name">Video 2</span>
+            <div class="track-header__controls">
+              <button class="track-header__btn" title="Visibilidad" aria-label="Toggle visibilidad Video 2">
+                <svg class="icon icon--xs"><use href="#icon-eye"/></svg>
+              </button>
+              <button class="track-header__btn" title="Bloquear" aria-label="Toggle bloqueo Video 2">
+                <svg class="icon icon--xs"><use href="#icon-lock"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="track-header">
+            <span class="track-header__badge track-header__badge--text">T1</span>
+            <span class="track-header__name">Texto</span>
+            <div class="track-header__controls">
+              <button class="track-header__btn" title="Visibilidad" aria-label="Toggle visibilidad Texto">
+                <svg class="icon icon--xs"><use href="#icon-eye"/></svg>
+              </button>
+              <button class="track-header__btn" title="Bloquear" aria-label="Toggle bloqueo Texto">
+                <svg class="icon icon--xs"><use href="#icon-lock"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="track-header">
+            <span class="track-header__badge track-header__badge--audio">A1</span>
+            <span class="track-header__name">Audio 1</span>
+            <div class="track-header__controls">
+              <button class="track-header__btn" title="Silenciar" aria-label="Toggle silenciar Audio 1">
+                <svg class="icon icon--xs"><use href="#icon-volume"/></svg>
+              </button>
+              <button class="track-header__btn" title="Bloquear" aria-label="Toggle bloqueo Audio 1">
+                <svg class="icon icon--xs"><use href="#icon-lock"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="track-header">
+            <span class="track-header__badge track-header__badge--audio">A2</span>
+            <span class="track-header__name">Audio 2</span>
+            <div class="track-header__controls">
+              <button class="track-header__btn" title="Silenciar" aria-label="Toggle silenciar Audio 2">
+                <svg class="icon icon--xs"><use href="#icon-volume"/></svg>
+              </button>
+              <button class="track-header__btn" title="Bloquear" aria-label="Toggle bloqueo Audio 2">
+                <svg class="icon icon--xs"><use href="#icon-lock"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Track Content (clips + ruler) -->
+        <div class="timeline__content">
+          <div class="timeline__ruler" aria-hidden="true">
+            <span class="timeline__mark" style="left:0%">00:00</span>
+            <span class="timeline__mark" style="left:10%">00:15</span>
+            <span class="timeline__mark" style="left:20%">00:30</span>
+            <span class="timeline__mark" style="left:30%">00:45</span>
+            <span class="timeline__mark" style="left:40%">01:00</span>
+            <span class="timeline__mark" style="left:50%">01:15</span>
+            <span class="timeline__mark" style="left:60%">01:30</span>
+            <span class="timeline__mark" style="left:70%">01:45</span>
+            <span class="timeline__mark" style="left:80%">02:00</span>
+            <span class="timeline__mark" style="left:90%">02:15</span>
+          </div>
+
+          <!-- Playhead -->
+          <div class="timeline__playhead" style="left:10%;" aria-label="Cabezal de reproducción">
+            <div class="timeline__playhead-head"></div>
+            <div class="timeline__playhead-line"></div>
+          </div>
+
+          <!-- Tracks -->
+          <div class="timeline__tracks">
+            <!-- Video 1 -->
+            <div class="track">
+              <div class="clip clip--video clip--selected" style="left:0%;width:28%;">
+                <span class="clip__name">intro_final.mp4</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+              <div class="clip clip--video" style="left:30%;width:35%;">
+                <span class="clip__name">escena_01.mp4</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+              <div class="clip clip--video" style="left:67%;width:25%;">
+                <span class="clip__name">cierre.mp4</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+            </div>
+            <!-- Video 2 -->
+            <div class="track">
+              <div class="clip clip--overlay" style="left:15%;width:20%;">
+                <span class="clip__name">overlay.png</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+            </div>
+            <!-- Texto -->
+            <div class="track">
+              <div class="clip clip--text" style="left:5%;width:18%;">
+                <span class="clip__name">Título Principal</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+              <div class="clip clip--text" style="left:68%;width:15%;">
+                <span class="clip__name">Créditos</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+            </div>
+            <!-- Audio 1 -->
+            <div class="track">
+              <div class="clip clip--audio" style="left:0%;width:92%;">
+                <span class="clip__name">musica_fondo.mp3</span>
+                <div class="clip__waveform" aria-hidden="true"></div>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+            </div>
+            <!-- Audio 2 -->
+            <div class="track">
+              <div class="clip clip--sfx" style="left:30%;width:15%;">
+                <span class="clip__name">sfx_transicion.wav</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+              <div class="clip clip--sfx" style="left:65%;width:12%;">
+                <span class="clip__name">sfx_cierre.wav</span>
+                <div class="clip__handle clip__handle--left"></div>
+                <div class="clip__handle clip__handle--right"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
